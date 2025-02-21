@@ -10,22 +10,14 @@ import type { I18n } from "./i18n";
 import type { KcContext } from "./KcContext";
 import { Button } from "../components/ui/button";
 import { ModeToggle } from "../components/ui/mode-toggle";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../components/ui/card";
+import { Card, CardContent } from "../components/ui/card";
 import "../styles/global.css";
 import { GlobeAltIcon } from "@heroicons/react/24/outline";
 import {
     DropdownMenu,
     DropdownMenuTrigger,
     DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuCheckboxItem,
-    DropdownMenuRadioGroup,
-    DropdownMenuRadioItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuSub,
-    DropdownMenuSubTrigger,
-    DropdownMenuSubContent
+    DropdownMenuItem
 } from "../components/ui/dropdown-menu";
 
 export function Template(props: TemplateProps<KcContext, I18n>) {
@@ -49,7 +41,7 @@ export function Template(props: TemplateProps<KcContext, I18n>) {
 
     const { msg, msgStr, getChangeLocaleUrl, labelBySupportedLanguageTag, currentLanguageTag } = i18n;
 
-    const { realm, locale, auth, url, message, isAppInitiatedAction, authenticationSession, scripts } = kcContext;
+    const { realm, locale, auth, url, message, isAppInitiatedAction, scripts } = kcContext;
 
     useEffect(() => {
         document.title = documentTitle ?? msgStr("loginTitle", kcContext.realm.displayName);
@@ -97,22 +89,6 @@ export function Template(props: TemplateProps<KcContext, I18n>) {
                 type: "module",
                 src: `${url.resourcesPath}/js/menu-button-links.js`
             },
-            ...(authenticationSession === undefined
-                ? []
-                : [
-                      {
-                          type: "module",
-                          textContent: [
-                              `import { checkCookiesAndSetTimer } from "${url.resourcesPath}/js/authChecker.js";`,
-                              ``,
-                              `checkCookiesAndSetTimer(`,
-                              `  "${authenticationSession.authSessionId}",`,
-                              `  "${authenticationSession.tabId}",`,
-                              `  "${url.ssoLoginInOtherTabsUrl}"`,
-                              `);`
-                          ].join("\n")
-                      } as const
-                  ]),
             ...scripts.map(
                 script =>
                     ({
@@ -246,8 +222,7 @@ export function Template(props: TemplateProps<KcContext, I18n>) {
                                 <form id="kc-select-try-another-way-form" action={url.loginAction} method="post">
                                     <div className={kcClsx("kcFormGroupClass")}>
                                         <input type="hidden" name="tryAnotherWay" value="on" />
-                                        <a
-                                            href="#"
+                                        <button
                                             id="try-another-way"
                                             onClick={() => {
                                                 document.forms["kc-select-try-another-way-form" as never].submit();
@@ -255,7 +230,7 @@ export function Template(props: TemplateProps<KcContext, I18n>) {
                                             }}
                                         >
                                             {msg("doTryAnotherWay")}
-                                        </a>
+                                        </button>
                                     </div>
                                 </form>
                             )}

@@ -1,8 +1,6 @@
 import React from "react";
-import { clsx } from "keycloakify/tools/clsx";
-
 export interface SocialProvidersProps {
-    social: {
+    social?: {
         providers?: Array<{
             alias: string;
             loginUrl: string;
@@ -10,7 +8,7 @@ export interface SocialProvidersProps {
             iconClasses?: string;
         }>;
     };
-    kcClsx: (...args: any[]) => string;
+    kcClsx?: (...args: any[]) => string;
     clsx: (...args: any[]) => string;
     msg: any;
     realm: {
@@ -20,18 +18,18 @@ export interface SocialProvidersProps {
 
 export const SocialProviders: React.FC<SocialProvidersProps> = ({
     social,
-    kcClsx,
     clsx,
     msg,
     realm
 }) => {
-    const providers = social.providers || [];
+    const providers = social?.providers || [];
 
     return (
         realm.password &&
         providers.length > 0 && (
             <>
                 {realm.password &&
+                    social &&
                     social.providers !== undefined &&
                     social.providers.length !== 0 && (
                         <div id="kc-social-providers" className="mt-5 space-y-7">

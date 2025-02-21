@@ -228,14 +228,14 @@ export default function LoginConfigTotp(
     );
 }
 
-function LogoutOtherSessions(props: { kcClsx: KcClsx; i18n: I18n }) {
+function LogoutOtherSessions(props: { kcClsx?: KcClsx; i18n: I18n }) {
     const { kcClsx, i18n } = props;
 
     const { msg } = i18n;
 
     return (
-        <div id="kc-form-options" className={kcClsx("kcFormOptionsClass")}>
-            <div className={kcClsx("kcFormOptionsWrapperClass")}>
+        <div id="kc-form-options" className={kcClsx && kcClsx("kcFormOptionsClass")}>
+            <div className={kcClsx && kcClsx("kcFormOptionsWrapperClass")}>
                 <div className="checkbox">
                     <label>
                         <input

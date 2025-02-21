@@ -1,7 +1,5 @@
-import { useState, useEffect, useReducer } from "react";
-import { clsx } from "keycloakify/tools/clsx";
-import { assert } from "keycloakify/tools/assert";
-import { getKcClsx, type KcClsx } from "keycloakify/login/lib/kcClsx";
+import { useState } from "react";
+import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";

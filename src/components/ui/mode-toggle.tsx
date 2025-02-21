@@ -10,6 +10,7 @@ import {
 import { useState } from "react";
 
 export function ModeToggle() {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [isDarkMode, setIsDarkMode] = useState(false);
 
     const setTheme = (mode: string) => {

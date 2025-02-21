@@ -23,7 +23,7 @@ export default function LoginOauthGrant(props: PageProps<Extract<KcContext, { pa
             bodyClassName="oauth"
             headerNode={
                 <>
-                    {client.attributes.logoUri && <img src={client.attributes.logoUri} />}
+                    {client.attributes.logoUri && <img alt="logo" src={client.attributes.logoUri} />}
                     <p>{client.name ? msg("oauthGrantTitle", advancedMsgStr(client.name)) : msg("oauthGrantTitle", client.clientId)}</p>
                 </>
             }
@@ -52,7 +52,7 @@ export default function LoginOauthGrant(props: PageProps<Extract<KcContext, { pa
                             {client.attributes.tosUri && (
                                 <>
                                     {msg("oauthGrantReview")}
-                                    <a href={client.attributes.tosUri} target="_blank">
+                                    <a href={client.attributes.tosUri} target="_blank" rel="noreferrer">
                                         {msg("oauthGrantTos")}
                                     </a>
                                 </>
@@ -60,7 +60,7 @@ export default function LoginOauthGrant(props: PageProps<Extract<KcContext, { pa
                             {client.attributes.policyUri && (
                                 <>
                                     {msg("oauthGrantReview")}
-                                    <a href={client.attributes.policyUri} target="_blank">
+                                    <a href={client.attributes.policyUri} target="_blank" rel="noreferrer">
                                         {msg("oauthGrantPolicy")}
                                     </a>
                                 </>

@@ -1,5 +1,3 @@
-import { useEffect, useReducer } from "react";
-import { assert } from "keycloakify/tools/assert";
 import { getKcClsx, type KcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
@@ -114,14 +112,14 @@ export default function LoginUpdatePassword(props: PageProps<Extract<KcContext, 
     );
 }
 
-function LogoutOtherSessions(props: { kcClsx: KcClsx; i18n: I18n }) {
+function LogoutOtherSessions(props: { kcClsx?: KcClsx; i18n: I18n }) {
     const { kcClsx, i18n } = props;
 
     const { msg } = i18n;
 
     return (
-        <div id="kc-form-options" className={kcClsx("kcFormOptionsClass")}>
-            <div className={kcClsx("kcFormOptionsWrapperClass")}>
+        <div id="kc-form-options" className={kcClsx && kcClsx("kcFormOptionsClass")}>
+            <div className={kcClsx && kcClsx("kcFormOptionsWrapperClass")}>
                 <div className="checkbox">
                     <div className="flex items-center space-x-2">
                         <input

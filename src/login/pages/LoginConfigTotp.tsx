@@ -2,7 +2,7 @@ import { getKcClsx, KcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
-import { Button, buttonVariants } from "../../components/ui/button";
+import { buttonVariants } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
 import { TextDisplay } from "../../components/ui/TextDisplay";
 import { checkboxVariants } from "../../components/ui/checkbox";
@@ -39,7 +39,7 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
                         </ul>
                     </li>
 
-                    {mode == "manual" ? (
+                    {mode === "manual" ? (
                         <>
                             <li>
                                 <p>{msg("loginTotpManualStep2")}</p>
@@ -199,13 +199,13 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
     );
 }
 
-function LogoutOtherSessions(props: { kcClsx: KcClsx; i18n: I18n }) {
+function LogoutOtherSessions(props: { kcClsx?: KcClsx; i18n: I18n }) {
     const { kcClsx, i18n } = props;
 
     const { msg } = i18n;
 
     return (
-        <div id="kc-form-options" className={kcClsx("kcFormOptionsClass")}>
+        <div id="kc-form-options" className={kcClsx && kcClsx("kcFormOptionsClass")}>
             <div>
                 <div className="checkbox flex items-center text-foreground">
                     <div className="flex items-center ml-5 space-x-2 ">

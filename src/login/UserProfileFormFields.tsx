@@ -1,4 +1,4 @@
-import { useEffect, useReducer, Fragment } from "react";
+import { useEffect, Fragment } from "react";
 import { assert } from "keycloakify/tools/assert";
 import type { KcClsx } from "keycloakify/login/lib/kcClsx";
 import {
@@ -208,7 +208,7 @@ function GroupLabel(props: {
 }
 
 function FieldErrors(props: { attribute: Attribute; displayableErrors: FormFieldError[]; fieldIndex: number | undefined; kcClsx: KcClsx }) {
-    const { attribute, fieldIndex, kcClsx } = props;
+    const { attribute, fieldIndex } = props;
 
     const displayableErrors = props.displayableErrors.filter(error => error.fieldIndex === fieldIndex);
 

@@ -31,7 +31,7 @@ export function Template(props: TemplateProps<KcContext, I18n>) {
 
     const { msg, msgStr, getChangeLocaleUrl, labelBySupportedLanguageTag, currentLanguageTag } = i18n;
 
-    const { realm, locale, auth, url, message, isAppInitiatedAction, authenticationSession, scripts } = kcContext;
+    const { realm, locale, auth, url, message, isAppInitiatedAction, scripts } = kcContext;
 
     useEffect(() => {
         document.title = documentTitle ?? msgStr("loginTitle", kcContext.realm.displayName);
@@ -79,22 +79,6 @@ export function Template(props: TemplateProps<KcContext, I18n>) {
                 type: "module",
                 src: `${url.resourcesPath}/js/menu-button-links.js`
             },
-            ...(authenticationSession === undefined
-                ? []
-                : [
-                      {
-                          type: "module",
-                          textContent: [
-                              `import { checkCookiesAndSetTimer } from "${url.resourcesPath}/js/authChecker.js";`,
-                              ``,
-                              `checkCookiesAndSetTimer(`,
-                              `  "${authenticationSession.authSessionId}",`,
-                              `  "${authenticationSession.tabId}",`,
-                              `  "${url.ssoLoginInOtherTabsUrl}"`,
-                              `);`
-                          ].join("\n")
-                      } as const
-                  ]),
             ...scripts.map(
                 script =>
                     ({
