@@ -1,11 +1,11 @@
 {
-    "name": "keycloakify-starter",
-    "version": "0.0.0",
+    "name": "keycloakify-tailwind-shadcn",
+    "version": "0.0.1",
     "description": "Keycloakify Webpack Starter",
-    "homepage": "https://nima70.github.io/keycloakify-tailwind-shadcn/storybook/",
+    "homepage": "https://fugue-state-io.github.io/keycloakify-tailwind-shadcn/storybook/",
     "repository": {
         "type": "git",
-        "url": "git://github.com/keycloakify/keycloakify-starter-webpack.git"
+        "url": "git://github.com/fugue-state-io/keycloakify-tailwind-shadcn.git"
     },
     "scripts": {
         "prestorybook": "keycloakify update-kc-gen && keycloakify copy-keycloak-resources-to-public",
