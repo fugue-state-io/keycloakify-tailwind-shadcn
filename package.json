@@ -17,10 +17,11 @@
         "build": "react-scripts build",
         "postbuild": "rimraf build/keycloak-resources",
         "build-keycloak-theme": "npm run build && rm -rf ./build/keycloakify-dev-resources && keycloakify build",
-        "format": "prettier . --write"
+        "format": "prettier . --write",
+        "import" : "keycloakify initialize-account-theme"
     },
     "keycloakify": {
-        "accountThemeImplementation": "none",
+        "accountThemeImplementation": "Multi-Page",
         "projectBuildDirPath": "build",
         "staticDirPathInProjectBuildDirPath": "static",
         "publicDirPath": "public"
