@@ -184,7 +184,7 @@ export function Template(props: TemplateProps<KcContext, I18n>) {
                                                 {msg("requiredFields")}
                                             </span>
                                         </div>
-                                        <div className="col-md-10">{node}</div>
+                                        <div className="col-md-12">{node}</div>
                                     </div>
                                 );
                             }
