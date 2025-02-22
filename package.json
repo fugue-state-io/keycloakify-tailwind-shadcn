@@ -1,6 +1,6 @@
 {
     "name": "keycloakify-tailwind-shadcn",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "Keycloakify Webpack Starter",
     "homepage": "https://fugue-state-io.github.io/keycloakify-tailwind-shadcn/storybook/",
     "repository": {
@@ -16,7 +16,7 @@
         "prebuild": "keycloakify update-kc-gen",
         "build": "react-scripts build",
         "postbuild": "rimraf build/keycloak-resources",
-        "build-keycloak-theme": "npm run build && keycloakify build",
+        "build-keycloak-theme": "npm run build && rm -rf ./build/keycloakify-dev-resources && keycloakify build",
         "format": "prettier . --write"
     },
     "keycloakify": {
@@ -38,7 +38,8 @@
         "@reduxjs/toolkit": "^2.2.7",
         "class-variance-authority": "^0.7.0",
         "clsx": "^2.1.1",
-        "keycloakify": "^10.0.5",
+        "keycloak": "^1.2.0",
+        "keycloakify": "^11.8.15",
         "lucide-react": "^0.438.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",

@@ -39,9 +39,9 @@ export function Template(props: TemplateProps<KcContext, I18n>) {
 
     const { kcClsx } = getKcClsx({ doUseDefaultCss, classes });
 
-    const { msg, msgStr, getChangeLocaleUrl, labelBySupportedLanguageTag, currentLanguageTag } = i18n;
+    const { msg, msgStr, currentLanguage} = i18n;
 
-    const { realm, locale, auth, url, message, isAppInitiatedAction, scripts } = kcContext;
+    const { realm, locale, auth, url, message, isAppInitiatedAction } = kcContext;
 
     useEffect(() => {
         document.title = documentTitle ?? msgStr("loginTitle", kcContext.realm.displayName);
@@ -88,14 +88,7 @@ export function Template(props: TemplateProps<KcContext, I18n>) {
             {
                 type: "module",
                 src: `${url.resourcesPath}/js/menu-button-links.js`
-            },
-            ...scripts.map(
-                script =>
-                    ({
-                        type: "text/javascript",
-                        src: script
-                    }) as const
-            )
+            }
         ]
     });
 
@@ -128,16 +121,16 @@ export function Template(props: TemplateProps<KcContext, I18n>) {
                                     >
                                         <div className="flex space-x-2">
                                             <GlobeAltIcon className="h-5 w-5" />
-                                            <span>{labelBySupportedLanguageTag[currentLanguageTag]}</span>
+                                            <span>{currentLanguage.label}</span>
                                         </div>
                                     </Button>
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent id="language-switch1" role="menu">
                                     {locale.supported.map(({ languageTag }, i) => (
                                         <DropdownMenuItem key={languageTag} role="none">
-                                            <a role="menuitem" id={`language-${i + 1}`} href={getChangeLocaleUrl(languageTag)}>
-                                                {labelBySupportedLanguageTag[languageTag]}
-                                            </a>
+                                            <Button role="menuitem" id={`language-${i + 1}`}>
+                                                {languageTag}
+                                            </Button>
                                         </DropdownMenuItem>
                                     ))}
                                 </DropdownMenuContent>

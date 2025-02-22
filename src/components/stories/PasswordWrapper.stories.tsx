@@ -19,14 +19,14 @@ const KcContext = getKcContextMock({
 const i18nMock: I18n = {
     msgStr: (key: string) => (key === "hidePassword" ? "Hide password" : "Show password"),
     msg: (key: string) => React.createElement("span", {}, key),
-    advancedMsg: (key: string, ...args: (string | undefined)[]) =>
-        React.createElement("span", {}, `${key} ${args.join(" ")}`),
-    currentLanguageTag: "en",
-    getChangeLocaleUrl: (languageTag: string) => `#${languageTag}`,
-    labelBySupportedLanguageTag: { en: "English" },
-    advancedMsgStr: (key: string, ...args: (string | undefined)[]) =>
-        `${key} ${args.join(" ")}`,
-    isFetchingTranslations: false
+    advancedMsg: (key: string, ...args: (string | undefined)[]) => React.createElement("span", {}, `${key} ${args.join(" ")}`),
+    advancedMsgStr: (key: string, ...args: (string | undefined)[]) => `${key} ${args.join(" ")}`,
+    isFetchingTranslations: false,
+    currentLanguage: {
+        languageTag: "",
+        label: ""
+    },
+    enabledLanguages: []
 };
 
 // Mock for kcClsx
