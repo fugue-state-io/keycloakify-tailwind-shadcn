@@ -3,8 +3,7 @@ import { assert } from "keycloakify/tools/assert";
 import { clsx } from "keycloakify/tools/clsx";
 import type { TemplateProps } from "keycloakify/login/TemplateProps";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
-import { useInsertScriptTags } from "keycloakify/tools/useInsertScriptTags";
-import { useInsertLinkTags } from "keycloakify/tools/useInsertLinkTags";
+import { useInitialize } from "keycloakify/login/Template.useInitialize";
 import { useSetClassName } from "keycloakify/tools/useSetClassName";
 import type { I18n } from "./i18n";
 import type { KcContext } from "./KcContext";
@@ -39,9 +38,8 @@ export function Template(props: TemplateProps<KcContext, I18n>) {
 
     const { kcClsx } = getKcClsx({ doUseDefaultCss, classes });
 
-    const { msg, msgStr, currentLanguage} = i18n;
-
-    const { realm, locale, auth, url, message, isAppInitiatedAction } = kcContext;
+    const { msg, msgStr, currentLanguage, enabledLanguages } = i18n;
+    const { realm, auth, url, message, isAppInitiatedAction } = kcContext;
 
     useEffect(() => {
         document.title = documentTitle ?? msgStr("loginTitle", kcContext.realm.displayName);
@@ -57,54 +55,15 @@ export function Template(props: TemplateProps<KcContext, I18n>) {
         className: bodyClassName ?? kcClsx("kcBodyClass")
     });
 
-    useEffect(() => {
-        const { currentLanguageTag } = locale ?? {};
+    const { isReadyToRender } = useInitialize({ kcContext, doUseDefaultCss });
 
-        if (currentLanguageTag === undefined) {
-            return;
-        }
-
-        const html = document.querySelector("html");
-        assert(html !== null);
-        html.lang = currentLanguageTag;
-    }, []);
-
-    const { areAllStyleSheetsLoaded } = useInsertLinkTags({
-        componentOrHookName: "Template",
-        hrefs: !doUseDefaultCss
-            ? []
-            : [
-                  `${url.resourcesCommonPath}/node_modules/@patternfly/patternfly/patternfly.min.css`,
-                  `${url.resourcesCommonPath}/node_modules/patternfly/dist/css/patternfly.min.css`,
-                  `${url.resourcesCommonPath}/node_modules/patternfly/dist/css/patternfly-additions.min.css`,
-                  `${url.resourcesCommonPath}/lib/pficon/pficon.css`,
-                  `${url.resourcesPath}/css/login.css`
-              ]
-    });
-
-    const { insertScriptTags } = useInsertScriptTags({
-        componentOrHookName: "Template",
-        scriptTags: [
-            {
-                type: "module",
-                src: `${url.resourcesPath}/js/menu-button-links.js`
-            }
-        ]
-    });
-
-    useEffect(() => {
-        if (areAllStyleSheetsLoaded) {
-            insertScriptTags();
-        }
-    }, [areAllStyleSheetsLoaded]);
-
-    if (!areAllStyleSheetsLoaded) {
+    if (!isReadyToRender) {
         return null;
     }
     const languageSelector = () => {
         return (
             <div>
-                {realm.internationalizationEnabled && (assert(locale !== undefined), locale.supported.length > 1) && (
+                {enabledLanguages.length > 1 && (
                     <div className="mt-0.5 -mr-3  justify-end">
                         <div id="kc-locale-wrapper" className="flex  justify-end">
                             <DropdownMenu>
@@ -126,11 +85,11 @@ export function Template(props: TemplateProps<KcContext, I18n>) {
                                     </Button>
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent id="language-switch1" role="menu">
-                                    {locale.supported.map(({ languageTag }, i) => (
+                                    {enabledLanguages.map(({ languageTag, label, href }, i) => (
                                         <DropdownMenuItem key={languageTag} role="none">
-                                            <Button role="menuitem" id={`language-${i + 1}`}>
-                                                {languageTag}
-                                            </Button>
+                                            <a role="menuitem" id={`language-${i + 1}`} href={href}>
+                                                {label}
+                                            </a>
                                         </DropdownMenuItem>
                                     ))}
                                 </DropdownMenuContent>

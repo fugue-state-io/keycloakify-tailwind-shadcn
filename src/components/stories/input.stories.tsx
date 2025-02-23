@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { Input, InputProps } from "../ui/input";
+import { Input } from "../ui/input";
 
 // Define metadata for the Input component
 const meta: Meta<typeof Input> = {
@@ -25,7 +25,7 @@ const meta: Meta<typeof Input> = {
 export default meta;
 
 // Define storyObj for the default input story
-export const Default: StoryObj<InputProps> = {
+export const Default: StoryObj = {
     args: {
         type: "text",
         placeholder: "Enter your text"
@@ -33,7 +33,7 @@ export const Default: StoryObj<InputProps> = {
 };
 
 // Define storyObj for a disabled input story
-export const Disabled: StoryObj<InputProps> = {
+export const Disabled: StoryObj = {
     args: {
         type: "text",
         placeholder: "This input is disabled",
@@ -42,7 +42,7 @@ export const Disabled: StoryObj<InputProps> = {
 };
 
 // Define storyObj for password input
-export const Password: StoryObj<InputProps> = {
+export const Password: StoryObj = {
     args: {
         type: "password",
         placeholder: "Enter your password"
@@ -50,7 +50,7 @@ export const Password: StoryObj<InputProps> = {
 };
 
 // Define storyObj for email input
-export const Email: StoryObj<InputProps> = {
+export const Email: StoryObj = {
     args: {
         type: "email",
         placeholder: "Enter your email"
