@@ -1,7 +1,4 @@
 import * as React from "react"
-import { GalleryVerticalEnd } from "lucide-react"
-
-import { NavMain } from "@/components/nav-main"
 import {
   Sidebar,
   SidebarContent,
@@ -11,7 +8,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
-} from "@/components/ui/sidebar"
+} from "./ui/sidebar"
 
 // This is sample data.
 const data = {
@@ -148,7 +145,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar {...props}>
       <SidebarContent>
-        <NavMain items={data.navMain} />
+        {props.children}
       </SidebarContent>
       <SidebarFooter>
       </SidebarFooter>
